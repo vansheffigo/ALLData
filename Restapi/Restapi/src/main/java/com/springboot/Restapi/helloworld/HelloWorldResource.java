@@ -28,4 +28,5 @@ public class HelloWorldResource {
 	public HelloWorldBean helloWorldMultiplePathParam(@PathVariable String name, @PathVariable String message) {
 		return new HelloWorldBean("Hello World" + name + "," + message);
 	}
+
 }

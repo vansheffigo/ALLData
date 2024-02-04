@@ -1,9 +1,16 @@
 package com.example.jpahibernatepractice.jpahibernate.course.jdbc;
 
-public class Course {
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
+@Entity
+public class Course {
+	@Id
 	private long id;
+	@Column(name = "name")
 	private String name;
+	@Column(name = "author")
 	private String author;
 
 	public Course() {
