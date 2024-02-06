@@ -23,7 +23,7 @@ public class EmployeeEntity {
 	@Column(name = "gender")
 	private String gender;
 	@Column(name = "date_of_birth")
-	private Date dateofBirth;
+	private Date dateOfBirth;
 
 	@Column(name = "address")
 	private String address;
@@ -37,7 +37,7 @@ public class EmployeeEntity {
 		this.id = id;
 		this.name = name;
 		this.gender = gender;
-		this.dateofBirth = dateofBirth;
+		this.dateOfBirth = dateofBirth;
 		this.address = address;
 	}
 
@@ -66,11 +66,11 @@ public class EmployeeEntity {
 	}
 
 	public Date getDateofBirth() {
-		return dateofBirth;
+		return dateOfBirth;
 	}
 
 	public void setDateofBirth(Date dateofBirth) {
-		this.dateofBirth = dateofBirth;
+		this.dateOfBirth = dateofBirth;
 	}
 
 	public String getAddress() {

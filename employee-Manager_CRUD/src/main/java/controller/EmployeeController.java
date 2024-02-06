@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.developer.employeeManager_CRUD.Entity.EmployeeEntity;
 
+import dto.Request.EmployeeRequest;
+import dto.Response.EmployeeResponse;
 import service.EmployeeService;
 
 @RestController
@@ -50,5 +52,19 @@ public class EmployeeController {
 	@DeleteMapping("/{id}")
 	public void deleteEmployee(@PathVariable("id") Long id) {
 		employeeService.deleteEmloyee(id);
+	}
+
+	// request and respose for saving and upading data
+	@PostMapping("/res")
+	public EmployeeResponse saveEmployeeResponse(@RequestBody EmployeeRequest employeeRequest) {
+		System.out.println("hello");
+		return employeeService.saveEmployee(employeeRequest);
+	}
+
+	@PutMapping("/res/{id}")
+	public EmployeeResponse updateEmpResponse(@RequestBody EmployeeRequest employeeRequest,
+			@PathVariable("id") Long id) {
+		return employeeService.updateEmployee(employeeRequest, id);
+
 	}
 }
