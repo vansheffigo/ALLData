@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -32,4 +33,6 @@ public class CoursesEntity {
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable(name = "user_course", joinColumns = @JoinColumn(name = "course_id"), inverseJoinColumns = @JoinColumn(name = "user_id"))
 	private Set<AdminEntity> users = new HashSet<>();
+	@ManyToOne
+	private CategoryEntity catogeries;
 }

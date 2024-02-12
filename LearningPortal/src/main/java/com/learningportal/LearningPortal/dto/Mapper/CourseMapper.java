@@ -7,7 +7,7 @@ import com.learningportal.LearningPortal.Entity.CoursesEntity;
 import com.learningportal.LearningPortal.dto.Request.CourseRequest;
 import com.learningportal.LearningPortal.dto.Response.CourseResponse;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface CourseMapper {
 
 	/////

@@ -64,17 +64,11 @@ public class UserController {
 		return authorService.saveAuthor(authorRequest);
 	}
 
-//	@PostMapping("/Course/{id}")
-//	public EnrollmentResponse savEnrollment(@RequestBody EnrollmentRequest enrollmentRequest)
-//	{
-//		return Enrol
-//	}
-
-	@PostMapping("/User_id/{user_id}/Course/{course_id}")
+	@PostMapping("/User_id/{user_id}/Course/{course_id}/Category_name/{category_name}")
 	public CourseResponse saveCourse(@PathVariable Long user_id, @PathVariable Long course_id,
-			@RequestBody CourseRequest courseRequest) {
+			@PathVariable String category_name, @RequestBody CourseRequest courseRequest) {
 		System.out.println(user_id + "     " + course_id);
-		return courseService.saveCourse(user_id, course_id, courseRequest);
+		return courseService.saveCourse(user_id, course_id, category_name, courseRequest);
 	}
 
 }

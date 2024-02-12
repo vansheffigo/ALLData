@@ -5,5 +5,5 @@ import com.learningportal.LearningPortal.dto.Response.CourseResponse;
 
 public interface CourseService {
 
-	CourseResponse saveCourse(Long user_id, Long course_id, CourseRequest courserequest);
+	CourseResponse saveCourse(Long user_id, Long course_id, String category_id, CourseRequest courserequest);
 }
