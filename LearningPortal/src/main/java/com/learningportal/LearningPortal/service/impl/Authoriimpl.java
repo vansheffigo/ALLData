@@ -20,7 +20,6 @@ public class Authoriimpl implements AuthorService {
 	public AuthorResponse saveAuthor(AuthorRequest authorRequest) {
 		AuthorEntity authorEntity = AuthorMapper.MAPPER.fromRequestToEntity(authorRequest);
 
-		System.out.println(authorEntity);
 		authorRepository.save(authorEntity);
 		return AuthorMapper.MAPPER.fromEntityToResponse(authorEntity);
 
