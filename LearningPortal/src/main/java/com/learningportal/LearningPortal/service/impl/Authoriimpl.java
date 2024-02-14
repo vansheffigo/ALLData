@@ -1,6 +1,8 @@
 
 package com.learningportal.LearningPortal.service.impl;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +17,12 @@ import com.learningportal.LearningPortal.service.AuthorService;
 public class Authoriimpl implements AuthorService {
 	@Autowired
 	AuthorRepository authorRepository;
+	private static final Logger logger = LoggerFactory.getLogger(AuthorService.class);
 
 	@Override
 	public AuthorResponse saveAuthor(AuthorRequest authorRequest) {
 		AuthorEntity authorEntity = AuthorMapper.MAPPER.fromRequestToEntity(authorRequest);
-
+		logger.info("This is Author Entity" + authorEntity);
 		authorRepository.save(authorEntity);
 		return AuthorMapper.MAPPER.fromEntityToResponse(authorEntity);
 

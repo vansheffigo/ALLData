@@ -1,6 +1,8 @@
 package com.learningportal.LearningPortal.service.impl;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,10 +38,7 @@ public class CourseServiceimpl implements CourseService {
 	public CourseResponse saveCourse(Long user_id, Long course_id, String category_name, CourseRequest courseRequest) {
 
 		CoursesEntity courseEntity = CourseMapper.MAPPER.fromRequestToEntity(courseRequest);
-		System.out.println(courseRequest);
-
-		AdminEntity users = adminRepository.findById(user_id)
-				.orElseThrow(() -> new EntityNotFoundException("Admin not found with id: " + user_id));
+		Optional<CoursesEntity> getCourse = courseRepository.findById(course_id);
 
 		Optional<CategoryEntity> optionalCategory = categoryRepository.findByName(category_name);
 		if (optionalCategory.isPresent()) {
@@ -54,9 +53,24 @@ public class CourseServiceimpl implements CourseService {
 			categoryRepository.save(newCategoryEntity);
 			courseEntity.setCatogeries(newCategoryEntity);
 		}
-		courseEntity.getUsers().add(users);
-		courseRepository.save(courseEntity);
-		return CourseMapper.MAPPER.fromEntityTOResponse(courseEntity);
 
+		if (getCourse.isEmpty()) {
+			courseRepository.save(courseEntity);
+		} else {
+			courseEntity = getCourse.get();
+		}
+		AdminEntity users = adminRepository.findById(user_id)
+				.orElseThrow(() -> new EntityNotFoundException("Admin not found with id: " + user_id));
+
+		Set<CoursesEntity> getCourses = users.getCourses();
+		getCourses.add(courseEntity);
+		users.setCourses(getCourses);
+		adminRepository.save(users);
+		return CourseMapper.MAPPER.fromEntityTOResponse(courseEntity);
+	}
+
+	@Override
+	public List<CoursesEntity> findAllCourses() {
+		return courseRepository.findAll();
 	}
 }

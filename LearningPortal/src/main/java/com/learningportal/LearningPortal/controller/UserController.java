@@ -1,12 +1,17 @@
 package com.learningportal.LearningPortal.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.learningportal.LearningPortal.Entity.AdminEntity;
+import com.learningportal.LearningPortal.Entity.CoursesEntity;
 import com.learningportal.LearningPortal.dto.Request.AdminRequest;
 import com.learningportal.LearningPortal.dto.Request.AuthorRequest;
 import com.learningportal.LearningPortal.dto.Request.CourseRequest;
@@ -14,10 +19,12 @@ import com.learningportal.LearningPortal.dto.Request.RoleRequest;
 import com.learningportal.LearningPortal.dto.Response.AdminResponse;
 import com.learningportal.LearningPortal.dto.Response.AuthorResponse;
 import com.learningportal.LearningPortal.dto.Response.CourseResponse;
+import com.learningportal.LearningPortal.dto.Response.FavoriteResponse;
 import com.learningportal.LearningPortal.dto.Response.RoleResponse;
 import com.learningportal.LearningPortal.service.AdminService;
 import com.learningportal.LearningPortal.service.AuthorService;
 import com.learningportal.LearningPortal.service.CourseService;
+import com.learningportal.LearningPortal.service.FavoriteService;
 import com.learningportal.LearningPortal.service.RoleService;
 
 import jakarta.validation.Valid;
@@ -38,7 +45,8 @@ public class UserController {
 
 	@Autowired
 	private CourseService courseService;
-
+	@Autowired
+	private FavoriteService favoriteService;
 //	@PostMapping
 //	public UserResponse saveUser(@RequestBody UserRequest userRequest) {
 //
@@ -71,4 +79,31 @@ public class UserController {
 		return courseService.saveCourse(user_id, course_id, category_name, courseRequest);
 	}
 
+	@GetMapping("/GetAllUsers")
+	public List<AdminEntity> findAllUsers() {
+
+		return adminService.findAllUsers();
+
+	}
+
+	@GetMapping("/GetAllCourses")
+	public List<CoursesEntity> findAllCourses() {
+		return courseService.findAllCourses();
+	}
+
+	@GetMapping("/GetAdminById")
+	public AdminEntity findByEmail(@RequestBody AdminRequest adminRequest) {
+		System.out.println(adminRequest.getEmail());
+//		return null;
+		return adminService.findByEmail(adminRequest.getEmail().toString());
+
+	}
+
+	@PostMapping("/Favorites/{userId}/{courseId}")
+	public FavoriteResponse Addingfavorite(@PathVariable("userId") Long userId,
+			@PathVariable("courseId") Long courseId) {
+
+		System.out.println(userId + " heelo  " + courseId);
+		return favoriteService.addFavorite(userId, courseId);
+	}
 }

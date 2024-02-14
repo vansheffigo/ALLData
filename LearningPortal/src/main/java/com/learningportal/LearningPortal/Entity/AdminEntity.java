@@ -12,6 +12,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -22,7 +23,7 @@ public class AdminEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long Admin_id;
-	@Column(name = "Email")
+	@Column(name = "Email", unique = true)
 	private String email;
 	@Column(name = "Password")
 	private String password;
@@ -41,5 +42,9 @@ public class AdminEntity {
 //	private List<CategoryEntity> categoryEntity = new ArrayList<>();
 
 	@ManyToMany(fetch = FetchType.EAGER)
-	private Set<CoursesEntity> courses = new HashSet<CoursesEntity>();
+	private Set<CoursesEntity> courses = new HashSet<>();
+
+	@OneToMany(mappedBy = "user")
+	private Set<FavoritesEntity> favorite = new HashSet<>();
+
 }

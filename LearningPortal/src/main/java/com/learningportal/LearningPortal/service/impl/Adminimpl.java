@@ -1,5 +1,7 @@
 package com.learningportal.LearningPortal.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +39,16 @@ public class Adminimpl implements AdminService {
 		adminRepository.save(adminEntity);
 
 		return AdminMapper.MAPPER.fromEntityToResponse(adminEntity);
+	}
+
+	@Override
+	public List<AdminEntity> findAllUsers() {
+		return adminRepository.findAll();
+	}
+
+	@Override
+	public AdminEntity findByEmail(String name) {
+		return adminRepository.findByEmail(name);
 	}
 
 }

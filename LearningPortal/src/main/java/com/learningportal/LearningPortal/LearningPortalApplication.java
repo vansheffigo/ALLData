@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 @ComponentScan(basePackages = { "com.learningportal.LearningPortal.service.impl",
 		"com.learningportal.LearningPortal.controller", "com.learningportal.LearningPortal.repository",
 		"com.learningportal.LearningPortal.service.CourseService", "com.learningportal.LearningPortal.dto.Mapper",
-		"com.learningportal.LearningPortal.dto.Mapper.CourseMapper" })
+		"com.learningportal.LearningPortal.dto.Mapper.CourseMapper",
+		"com.learningportal.LearningPortal.service.FavoriteService" })
 
 public class LearningPortalApplication {
 
