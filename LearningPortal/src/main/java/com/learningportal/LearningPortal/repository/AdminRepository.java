@@ -13,4 +13,5 @@ public interface AdminRepository extends JpaRepository<AdminEntity, Long> {
 	AdminEntity findByEmail(@Param("email") String email);
 
 //	AdminEntity findByEmail(String email);
+
 }

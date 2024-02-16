@@ -3,6 +3,9 @@ package com.learningportal.LearningPortal.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,10 +57,14 @@ public class UserController {
 //	}
 
 	@PostMapping("/Admin")
-	public AdminResponse saveAdmin(@Valid @RequestBody AdminRequest adminRequest) {
+	public ResponseEntity<?> saveAdmin(@Valid @RequestBody AdminRequest adminRequest) {
 		System.out.println(adminRequest);
 
-		return adminService.saveAdmin(adminRequest);
+		AdminResponse adminResponse = adminService.saveAdmin(adminRequest);
+		if (adminResponse != null)
+			return ResponseEntity.ok(adminResponse);
+		String s = "The user already exists Please enter new creadentails";
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(s);
 	}
 
 	@PostMapping("/Role/{id}")
@@ -92,11 +99,17 @@ public class UserController {
 	}
 
 	@GetMapping("/GetAdminById")
-	public AdminEntity findByEmail(@RequestBody AdminRequest adminRequest) {
+	public ResponseEntity<?> findByEmail(@RequestBody AdminRequest adminRequest) {
 		System.out.println(adminRequest.getEmail());
 //		return null;
-		return adminService.findByEmail(adminRequest.getEmail().toString());
+		AdminEntity adminEntity = adminService.findByEmail(adminRequest.getEmail());
 
+		if (adminEntity != null)
+			return ResponseEntity.ok(adminEntity);
+
+		String errorMessage = "The User for this email doesn't exist" + adminRequest.getEmail();
+
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).body(errorMessage);
 	}
 
 	@PostMapping("/Favorites/{userId}/{courseId}")
@@ -106,4 +119,10 @@ public class UserController {
 		System.out.println(userId + " heelo  " + courseId);
 		return favoriteService.addFavorite(userId, courseId);
 	}
+
+	@DeleteMapping("/DeleteUser")
+	public void DeleteUser(@RequestBody AdminRequest adminRequest) {
+		adminService.deleteuser(adminRequest.getEmail());
+	}
+
 }

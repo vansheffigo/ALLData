@@ -3,6 +3,7 @@ package com.learningportal.LearningPortal.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -32,6 +33,6 @@ public class CoursesEntity {
 //	private Set<AdminEntity> users = new HashSet<>();
 	@ManyToOne
 	private CategoryEntity catogeries;
-	@OneToMany(mappedBy = "course")
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL)
 	private Set<FavoritesEntity> favorite = new HashSet<>();
 }

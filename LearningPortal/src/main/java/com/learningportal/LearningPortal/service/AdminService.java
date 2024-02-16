@@ -12,6 +12,7 @@ public interface AdminService {
 
 	List<AdminEntity> findAllUsers();
 
-	AdminEntity findByEmail(String name);
+	AdminEntity findByEmail(String email);
 
+	void deleteuser(String email);
 }

@@ -14,6 +14,8 @@ import com.learningportal.LearningPortal.repository.AdminRepository;
 import com.learningportal.LearningPortal.repository.RoleRepository;
 import com.learningportal.LearningPortal.service.AdminService;
 
+import jakarta.transaction.Transactional;
+
 @Service
 public class Adminimpl implements AdminService {
 	@Autowired
@@ -25,6 +27,9 @@ public class Adminimpl implements AdminService {
 	@Override
 	public AdminResponse saveAdmin(AdminRequest adminRequest) {
 		System.out.println("hello");
+		AdminEntity getuser = adminRepository.findByEmail(adminRequest.getEmail());
+		if (getuser != null)
+			return null;
 		AdminEntity adminEntity = AdminMapper.MAPPER.fromRequestToEntity(adminRequest);
 		RoleEntity learnerRole = roleRepository.findByRole("Learner");// roleRepository.save(roleEntity);
 		if (learnerRole == null) {
@@ -47,8 +52,21 @@ public class Adminimpl implements AdminService {
 	}
 
 	@Override
-	public AdminEntity findByEmail(String name) {
-		return adminRepository.findByEmail(name);
+	public AdminEntity findByEmail(String email) {
+
+		AdminEntity adminEntity = adminRepository.findByEmail(email);
+
+		return adminEntity;
+	}
+
+	@Override
+	@Transactional
+	public void deleteuser(String email) {
+		AdminEntity adminEntity = adminRepository.findByEmail(email);
+		if (adminEntity != null) {
+//			adminEntity.getRoles().forEach(role -> role.getAdmins().remove(adminEntity));
+			adminRepository.delete(adminEntity);
+		}
 	}
 
 }

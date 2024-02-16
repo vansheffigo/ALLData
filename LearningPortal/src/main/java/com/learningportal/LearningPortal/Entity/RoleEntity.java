@@ -3,6 +3,7 @@ package com.learningportal.LearningPortal.Entity;
 import java.util.HashSet;
 import java.util.Set;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class RoleEntity {
 	private Long Role_id;
 	@Column(name = "Role")
 	private String role = "Learner";
-	@ManyToMany(mappedBy = "roles")
+	@ManyToMany(mappedBy = "roles", cascade = CascadeType.ALL)
 	private Set<AdminEntity> admins = new HashSet<>();
 
 }
