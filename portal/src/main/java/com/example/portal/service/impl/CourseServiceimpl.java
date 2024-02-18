@@ -17,6 +17,9 @@ import com.example.portal.repository.CategoryRepository;
 import com.example.portal.repository.CourseRepository;
 import com.example.portal.service.CourseService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class CourseServiceimpl implements CourseService {
 
@@ -61,12 +64,15 @@ public class CourseServiceimpl implements CourseService {
 			courseEntity = getCourse.get();
 		}
 		AdminEntity users = adminRepository.findByEmail(courseRequest.getEmail());
-		if (users == null)
+		if (users == null) {
+
 			return null;
 
+		}
 		Set<CoursesEntity> getCourses = users.getCourses();
 		getCourses.add(courseEntity);
 		users.setCourses(getCourses);
+
 		adminRepository.save(users);
 		return CourseMapper.MAPPER.fromEntityTOResponse(courseEntity);
 	}

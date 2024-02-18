@@ -124,7 +124,6 @@ public class UserController {
 
 	@GetMapping("/fetchCombined")
 	public List<AdminEntity> fetchCombined() {
-
 		return adminService.fetchCombined();
 	}
 
