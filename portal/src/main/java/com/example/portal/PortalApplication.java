@@ -2,9 +2,10 @@ package com.example.portal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.ComponentScan;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @ComponentScan(basePackages = { "com.example.portal.service.impl", "com.example.portal.controller",
 		"com.example.portal.repository", "com.example.portal.service.CourseService", "com.example.portal.dto.Mapper",
 		"com.example.portal.dto.Mapper.CourseMapper", "com.example.portal.service.FavoriteService",
