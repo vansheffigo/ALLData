@@ -7,9 +7,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication(exclude = { SecurityAutoConfiguration.class })
 @ComponentScan(basePackages = { "com.example.portal.service.impl", "com.example.portal.controller",
-		"com.example.portal.repository", "com.example.portal.service.CourseService", "com.example.portal.dto.Mapper",
-		"com.example.portal.dto.Mapper.CourseMapper", "com.example.portal.service.FavoriteService",
-		"com.example.portal.repository.AdminRepository" })
+		"com.example.portal.repository", "com.example.portal.service", "com.example.portal.dto.Mapper",
+		"com.example.portal.config", "com.example.portal.jwt" })
 
 public class PortalApplication {
 

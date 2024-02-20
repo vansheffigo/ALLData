@@ -27,5 +27,5 @@ public class AuthorEntity {
 	private String authorCourse;
 
 	@OneToMany
-	private List<CoursesEntity> coursesEntity = new ArrayList<>();;
+	private List<CoursesEntity> coursesEntity = new ArrayList<>();
 }
