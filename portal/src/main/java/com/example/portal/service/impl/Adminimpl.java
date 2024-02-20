@@ -2,6 +2,8 @@ package com.example.portal.service.impl;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.portal.dto.mapper.AdminMapper;
@@ -22,6 +24,8 @@ public class Adminimpl implements AdminService {
 
 	private final RoleRepository roleRepository;
 	private final AdminMapper adminMapper;
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public Adminimpl(AdminRepository adminRepository, RoleRepository roleRepository, AdminMapper adminMapper) {
 		super();
@@ -39,6 +43,7 @@ public class Adminimpl implements AdminService {
 			return null;
 
 		AdminEntity adminEntity = adminMapper.fromRequestToEntity(adminRequest);
+		adminEntity.setPassword(this.passwordEncoder.encode(adminEntity.getPassword()));
 		RoleEntity learnerRole = roleRepository.findByRole("Learner");
 		if (learnerRole == null) {
 			learnerRole = new RoleEntity();
