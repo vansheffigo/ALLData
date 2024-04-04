@@ -1,0 +1,84 @@
+@font-face {
+    font-family: "SF PRO";
+    src: url("../fonts/SF-Pro-Text-Regular.otf");
+}
+  
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+div,
+label {
+  font-family: "SF PRO" !important;
+  color: #2E3133;
+  line-height: normal
+}
+  
+.MuiDrawer-root{
+  & .MuiListItem-root:hover{
+    background: #e1e8f0;
+  }
+}
+
+.activeLink{
+  background-color:#e1e8f0;
+  border-left: 6px solid #012954 !important;
+}
+
+#table-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin-left: 250px;
+  margin-right: 100px;
+  margin-top: 15px;
+  width:'65%';
+  margin:'auto';
+}
+
+#retro-container{
+  border: 3px solid black;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 50%;
+  margin-top: 100px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  padding: 20px;
+}
+
+#data-table{
+  height: 400px;
+  width: 100%;
+}
+
+#newbill-button{
+  position: relative;
+  bottom: 10px;
+}
+
+#uploadretro-button{
+  top: 4px;
+}
+
+#validate-button{
+  top: 4px;
+  right: 4px;
+}
+
+.custom-snackbar-text {
+color: aqua; 
+}
+
+.css-yrdy0g-MuiDataGrid-columnHeaderRow{
+  background-color: #daf2fd;
+}
+
+// .MuiDataGrid-columnHeadersInner--scrollable .MuiDataGrid-columnSeparator:hover,
+// .MuiDataGrid-columnHeader:hover .MuiDataGrid-menuIcon {
+//     display: none; 
+// }
